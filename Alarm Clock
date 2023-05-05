@@ -1,0 +1,26 @@
+let timer;
+
+function startTimer() {
+	const hours = document.getElementById("hours").value;
+	const minutes = document.getElementById("minutes").value;
+	const seconds = document.getElementById("seconds").value;
+
+	let totalTime = hours * 3600 + minutes * 60 + seconds * 1;
+
+	timer = setInterval(function() {
+		totalTime--;
+		const hours = Math.floor(totalTime / 3600);
+		const minutes = Math.floor((totalTime % 3600) / 60);
+		const seconds = Math.floor(totalTime % 60);
+
+		document.getElementById("hours").value = hours;
+		document.getElementById("minutes").value = minutes;
+		document.getElementById("seconds").value = seconds;
+
+		if (totalTime <= 0) {
+			clearInterval(timer);
+			playSound();
+			alert("Time's up!");
+		}
+	}, 1000);
+}
